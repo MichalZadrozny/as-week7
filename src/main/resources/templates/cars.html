@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Car Management System</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}"/>
+    <link th:href="@{/fonts/css/fontawesome.css}" rel="stylesheet"/>
+    <link th:href="@{/fonts/css/solid.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="outer-panel">
+
+    <div class="title">
+        <h1>Car Management System <i class="fas fa-car"></i></h1>
+    </div>
+
+    <div class="navigation">
+        <div class="btn add-car-btn" th:onclick="'javascript:goTo();'">Main Page</div>
+        <div class="btn add-car-btn" th:onclick="'javascript:goTo(\'/cars/addCar\');'">Add Car</div>
+    </div>
+
+
+    <div class="cars-panel shadow">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Mark</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+
+            <tr class="content" th:each="car: ${carList}">
+                <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
+                    <div class="content-div left-content-div"><p th:text="${car.mark}"></p></div>
+                </td>
+                <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
+                    <div class="content-div"><p th:text="${car.model}"></p></div>
+                </td>
+                <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
+                    <div class="content-div"><p th:text="${car.color}"></p></div>
+                </td>
+                <td class="edit">
+                    <div class="content-div"><i class="fas fa-edit"
+                                                th:onclick="'javascript:goTo(\'' +'/cars/edit/'+ ${car.carId}  + '\');'"></i>
+                    </div>
+                </td>
+                <td class="delete">
+                    <div class="content-div right-content-div"><i class="fas fa-trash-alt"
+                                                                  th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '/delete\');'"></i>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+
+    </div>
+</div>
+
+<script th:src="@{/js/goTo.js}"></script>
+
+</body>
+</html>

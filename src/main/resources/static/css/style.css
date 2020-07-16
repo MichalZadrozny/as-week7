@@ -1,0 +1,291 @@
+/* GENERAL */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-image: linear-gradient(90deg, #134e5e, #71b280);
+    height: 100vh;
+    color: rgba(239, 236, 236, 0.85);
+    text-shadow: 1px 1px #06111d;
+}
+
+.btn {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    background-image: linear-gradient(90deg, rgba(15, 32, 39, 0.50), rgba(32, 58, 67, 0.50), rgba(44, 83, 100, 0.5));
+    cursor: pointer;
+    border-radius: 8px;
+    border: solid 1px #000000;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.add-car-btn {
+    width: 120px;
+
+}
+
+@media (max-width: 800px) {
+    .btn {
+        font-size: 1.6rem;
+    }
+}
+
+/* EDIT-CAR */
+
+.return-to-cars-btn {
+    width: 80px;
+    margin: 0 auto;
+}
+
+.outer-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 5rem;
+}
+
+.inner-panel {
+    background-color: rgba(0, 0, 0, .08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    min-width: 300px;
+    width: auto;
+    min-height: 490px;
+    height: auto;
+
+    border: 1px solid #042a09;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 30px;
+}
+
+.edit-fields {
+    min-height: 330px;
+    height: 25vh;
+}
+
+.inner-panel form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.inner-panel .field {
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem;
+}
+
+.inner-panel .info {
+    font-size: 2.2rem;
+    padding: 0;
+
+}
+
+.inner-panel label {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.inner-panel .name {
+    font-weight: bold;
+    padding: 0 1rem;
+}
+
+.inner-panel h1 {
+    font-size: 3rem;
+    padding: 2rem;
+}
+
+.inner-panel .buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 3rem;
+}
+
+.submit-info {
+    text-align: center;
+    color: #c70e0e;
+    text-shadow: none;
+    font-size: 1.8rem;
+}
+
+.submit-info p {
+    text-align: center;
+    width: 100%;
+
+}
+
+.hide {
+    display: none !important
+}
+
+
+@media (max-width: 600px) {
+
+    .inner-panel {
+        width: 90vw;
+    }
+
+    .inner-panel .field {
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+        padding: 3rem;
+    }
+
+    .inner-panel h1 {
+        font-size: 3rem;
+    }
+}
+
+/* CARS */
+
+.outer-panel .navigation {
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.shadow {
+    box-shadow: inset 0 0 1rem 0 rgba(0, 0, 0, 0.75);
+}
+
+.outer-panel .title {
+    font-size: 2.5rem;
+    padding: 4rem;
+}
+
+.cars-panel {
+    background-color: rgba(0, 0, 0, .08);
+    width: 95vw;
+    min-height: 70vh;
+
+    border: 1px solid #042a09;
+    border-radius: 15px;
+    overflow-x: auto;
+    margin: auto;
+}
+
+.cars-panel table {
+    margin: auto;
+    border-color: silver;
+    border-collapse: separate;
+    border-spacing: 0;
+    padding: 4rem;
+    width: 100%;
+}
+
+.cars-panel th {
+    font-size: 2.7rem;
+    padding: 0.3em
+}
+
+.cars-panel td {
+    font-size: 2.5rem;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.cars-panel tr {
+    min-width: 500px;
+    width: auto;
+    box-shadow: inset 0 0 1rem 0 rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.cars-panel table .id {
+    font-weight: bold;
+}
+
+.content-div {
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 2.8rem;
+}
+
+.content:hover .content-div {
+    background-color: rgba(255, 255, 255, .08);
+    cursor: pointer;
+}
+
+.left-content-div {
+    border-radius: 10px 0 0 10px;
+}
+
+.right-content-div {
+    border-radius: 0 10px 10px 0;
+}
+
+.cars-panel .delete i:hover {
+    color: rgba(241, 25, 25, 0.79) !important;
+}
+
+.cars-panel .edit i:hover {
+    color: rgba(176, 241, 58, 0.79) !important;
+}
+
+@media (max-width: 800px) {
+
+    .outer-panel .title {
+        font-size: 1.8rem;
+        padding: 3rem;
+    }
+
+    .cars-panel th {
+        font-size: 2.1rem;
+    }
+
+    .cars-panel td {
+        font-size: 2rem;
+    }
+
+}
+
+/* NOT FOUND */
+
+.inner-panel .return-text {
+    font-size: 2.3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 2.5rem;
+}
+
+/* INDEX */
+
+.index-inner-panel {
+    min-height: 300px !important;
+}
+
+.inner-panel .download-link {
+    text-decoration: none;
+    color: rgba(239, 236, 236, 0.85);
+    text-shadow: 1px 1px #06111d;
+}
+
+@media (max-width: 600px) {
+    .inner-panel h1 {
+        font-size: 2.4rem;
+        text-align: center;
+    }
+
+}
+
