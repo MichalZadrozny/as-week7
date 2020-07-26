@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class CarDaoImpl implements CarDao {
@@ -20,20 +21,20 @@ public class CarDaoImpl implements CarDao {
     @Autowired
     public CarDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-//        saveCar(1,"Fiat", "126p", "Yellow");
-//        saveCar(2,"Citroen", "Saxo", "Silver");
-//        saveCar(3,"Renaut", "Megane", "Blue");
+//        saveCar(new Car(1, "Fiat", "126p", "Yellow", 1995));
+//        saveCar(new Car(2, "Citroen", "Saxo", "Silver", 2001));
+//        saveCar(new Car(3, "Renaut", "Megane", "Blue", 2015));
 
 //        updateCar(new Car(4L,"Ford", "Musgang", "Red"));
 //        deleteCar(1);
 //        findAll().forEach(System.out::println);
-        System.out.println(geCarById(2));
+//        System.out.println(geCarById(2));
     }
 
     @Override
     public void saveCar(Car car) {
-        String sql = "INSERT INTO cars VALUES(?, ?, ?, ?)";
-        jdbcTemplate.update(sql,car.getCarId(), car.getMark(), car.getModel(), car.getColor());
+        String sql = "INSERT INTO cars VALUES(?, ?, ?, ?,?)";
+        jdbcTemplate.update(sql, car.getCarId(), car.getMark(), car.getModel(), car.getColor(), car.getProductionYear());
 
     }
 
@@ -44,21 +45,23 @@ public class CarDaoImpl implements CarDao {
         String sql = "SELECT * FROM cars";
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
 
-        maps.stream().map(element -> new Car(
+        return maps.stream().map(element -> new Car(
                 Long.parseLong(String.valueOf(element.get("car_id"))),
                 String.valueOf(element.get("mark")),
                 String.valueOf(element.get("model")),
-                String.valueOf(element.get("color"))
-        ));
+                String.valueOf(element.get("color")),
+                Long.parseLong(String.valueOf(element.get("production_year")))
+        )).collect(Collectors.toList());
 
 //        maps.forEach(element -> carList.add(new Car(
 //                Long.parseLong(String.valueOf(element.get("car_id"))),
 //                String.valueOf(element.get("mark")),
 //                String.valueOf(element.get("model")),
-//                String.valueOf(element.get("color"))
-//                )));
-
-        return carList;
+//                String.valueOf(element.get("color")),
+//                Long.parseLong(String.valueOf(element.get("production_year")))
+//        )));
+//
+//        return carList;
     }
 
     @Override
@@ -79,7 +82,7 @@ public class CarDaoImpl implements CarDao {
         return jdbcTemplate.queryForObject(sql, new RowMapper<Car>() {
             @Override
             public Car mapRow(ResultSet resultSet, int i) throws SQLException {
-                return new Car(resultSet.getLong("car_id"), resultSet.getString("mark"), resultSet.getString("model"), resultSet.getString("color"));
+                return new Car(resultSet.getLong("car_id"), resultSet.getString("mark"), resultSet.getString("model"), resultSet.getString("color"), resultSet.getLong("production_year"));
             }
         }, id);
     }

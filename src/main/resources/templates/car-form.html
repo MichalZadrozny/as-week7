@@ -15,14 +15,17 @@
     <div class="inner-panel shadow">
         <h1>Enter the car details</h1>
 
-
         <div class="edit-fields">
             <form th:action="@{/cars/{id}/save(id=${car.getCarId()})}" th:object="${car}" method="post">
+                <div class="field"><label class="name" for="id">Id:</label><input id="id" th:field="*{carId}" readonly/>
+                </div>
                 <div class="field"><label class="name" for="mark">Mark:</label><input id="mark" th:field="*{mark}"/>
                 </div>
                 <div class="field"><label class="name" for="model">Model:</label><input id="model" th:field="*{model}"/>
                 </div>
                 <div class="field"><label class="name" for="color">Color:</label><input id="color" th:field="*{color}"/>
+                </div>
+                <div class="field"><label class="name" for="year">Production year:</label><input id="year" th:field="*{productionYear}"/>
                 </div>
                 <div class="submit-info hide"><p>Fields cannot be empty</p></div>
                 <div class="buttons">
@@ -46,13 +49,16 @@
     const $mark = document.querySelector('#mark');
     const $model = document.querySelector('#model');
     const $color = document.querySelector('#color');
+    const $id = document.querySelector('#id');
+    const $year = document.querySelector('#year');
+
     const $submitButton = document.querySelector('.submit-btn');
     const $submitInfo = document.querySelector('.submit-info');
     const $form = document.querySelector('form');
 
     function isNotEmpty() {
 
-        if ($mark.value === '' || $model.value === '' || $color.value === '') {
+        if ($mark.value === '' || $model.value === '' || $color.value === ''|| $id.value === ''|| $year.value === '') {
             $submitInfo.classList.remove('hide');
             console.log("Submit button clicked");
 

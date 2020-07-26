@@ -62,21 +62,12 @@ body {
     justify-content: space-around;
     align-items: center;
 
-    min-width: 300px;
-    width: auto;
-    min-height: 490px;
-    height: auto;
-
     border: 1px solid #042a09;
     border-radius: 15px;
     overflow: hidden;
     padding: 30px;
 }
 
-.edit-fields {
-    min-height: 330px;
-    height: 25vh;
-}
 
 .inner-panel form {
     height: 100%;
@@ -86,16 +77,15 @@ body {
 }
 
 .inner-panel .field {
-    font-size: 1.8rem;
+    font-size: 1.95rem;
     display: flex;
+    padding: 1.3rem 1rem;
     justify-content: space-between;
-    padding: 3rem;
 }
 
 .inner-panel .info {
     font-size: 2.2rem;
-    padding: 0;
-
+    padding: 1rem;
 }
 
 .inner-panel label {
@@ -110,7 +100,7 @@ body {
 
 .inner-panel h1 {
     font-size: 3rem;
-    padding: 2rem;
+    padding: 3rem 2rem;
 }
 
 .inner-panel .buttons {
@@ -188,7 +178,7 @@ body {
     border-color: silver;
     border-collapse: separate;
     border-spacing: 0;
-    padding: 4rem;
+    padding: 5rem 7rem;
     width: 100%;
 }
 

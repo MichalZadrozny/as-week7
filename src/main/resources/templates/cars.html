@@ -27,23 +27,31 @@
         <table>
             <thead>
             <tr>
+                <th>#</th>
                 <th>Mark</th>
                 <th>Model</th>
                 <th>Color</th>
+                <th>Production year</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
 
-            <tr class="content" th:each="car: ${carList}">
+            <tr class="content" th:each="car, stat: ${carList}">
                 <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
-                    <div class="content-div left-content-div"><p th:text="${car.mark}"></p></div>
+                    <div class="content-div left-content-div"><p th:text="${stat.count}"></p></div>
+                </td>
+                <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
+                    <div class="content-div"><p th:text="${car.mark}"></p></div>
                 </td>
                 <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
                     <div class="content-div"><p th:text="${car.model}"></p></div>
                 </td>
                 <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
                     <div class="content-div"><p th:text="${car.color}"></p></div>
+                </td>
+                <td th:onclick="'javascript:goTo(\'/cars/' + ${car.carId} + '\');'">
+                    <div class="content-div"><p th:text="${car.productionYear}"></p></div>
                 </td>
                 <td class="edit">
                     <div class="content-div"><i class="fas fa-edit"

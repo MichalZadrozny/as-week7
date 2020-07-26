@@ -18,9 +18,12 @@
 
         <div class="edit-fields">
             <form th:action="@{/cars/{id}/save(id=${car.getCarId()})}" th:object="${car}" method="get">
+                <div class="field info"><p class="name">Id:</p><label th:text="*{carId}"></label></div>
                 <div class="field info"><p class="name">Mark:</p><label th:text="*{mark}"></label></div>
                 <div class="field info"><p class="name">Model:</p><label th:text="*{model}"></label></div>
                 <div class="field info"><p class="name">Color:</p><label th:text="*{color}"></label></div>
+                <div class="field info"><p class="name">Production year:</p><label th:text="*{productionYear}"></label></div>
+
                 <div class="buttons">
 
                     <div class="btn return-to-cars-btn" th:onclick="'javascript:goTo(\'/cars\');'">

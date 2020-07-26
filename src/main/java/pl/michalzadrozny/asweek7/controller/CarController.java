@@ -63,7 +63,7 @@ public class CarController {
     }
 
     @PostMapping("/{id}/save")
-    public String saveCar(@PathVariable long id, String mark, String model, String color) {
+    public String saveCar(@PathVariable long id, String mark, String model, String color, long productionYear) {
 
         Car oldCar = carDao.geCarById(id);
 
@@ -71,9 +71,10 @@ public class CarController {
             oldCar.setMark(mark);
             oldCar.setModel(model);
             oldCar.setColor(color);
+            oldCar.setProductionYear(productionYear);
             carDao.updateCar(oldCar);
         }else{
-            carDao.saveCar(new Car(id,mark,model,color));
+            carDao.saveCar(new Car(id,mark,model,color,productionYear));
         }
 
         return "redirect:/cars";
