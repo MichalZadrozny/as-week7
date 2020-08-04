@@ -16,8 +16,8 @@
         <h1>Enter the car details</h1>
 
         <div class="edit-fields">
-            <form th:action="@{/cars/{id}/save(id=${car.getCarId()})}" th:object="${car}" method="post">
-                <div class="field"><label class="name" for="id">Id:</label><input id="id" th:field="*{carId}" readonly/>
+            <form th:action="@{/cars/save}" th:object="${car}" method="post">
+                <div class="field"><label class="name" for="id">Id:</label><input id="id" th:field="*{carId}"/>
                 </div>
                 <div class="field"><label class="name" for="mark">Mark:</label><input id="mark" th:field="*{mark}"/>
                 </div>

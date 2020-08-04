@@ -1,5 +1,6 @@
 package pl.michalzadrozny.asweek7.dao;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class CarDaoImpl implements CarDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -34,8 +36,9 @@ public class CarDaoImpl implements CarDao {
     @Override
     public void saveCar(Car car) {
         String sql = "INSERT INTO cars VALUES(?, ?, ?, ?,?)";
+        log.info("Saving car to the database");
         jdbcTemplate.update(sql, car.getCarId(), car.getMark(), car.getModel(), car.getColor(), car.getProductionYear());
-
+        log.info("Saving car completed");
     }
 
     @Override
@@ -66,8 +69,8 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void updateCar(Car newCar) {
-        String sql = "UPDATE cars SET cars.mark=?, cars.model=?, cars.color=? WHERE cars.car_id=?";
-        jdbcTemplate.update(sql, newCar.getMark(), newCar.getModel(), newCar.getColor(), newCar.getCarId());
+        String sql = "UPDATE cars SET cars.mark=?, cars.model=?, cars.color=?, cars.production_year=? WHERE cars.car_id=?";
+        jdbcTemplate.update(sql, newCar.getMark(), newCar.getModel(), newCar.getColor(), newCar.getProductionYear(), newCar.getCarId());
     }
 
     @Override
@@ -76,14 +79,23 @@ public class CarDaoImpl implements CarDao {
         jdbcTemplate.update(sql, id);
     }
 
+//    @Override
+//    public Car geCarById(long id) {
+//        String sql = "SELECT * FROM cars WHERE car_id=?";
+//        return jdbcTemplate.queryForObject(sql, (resultSet, i) -> new Car(resultSet.getLong("car_id"), resultSet.getString("mark"), resultSet.getString("model"), resultSet.getString("color"), resultSet.getLong("production_year")), id);
+//    }
+
     @Override
     public Car geCarById(long id) {
         String sql = "SELECT * FROM cars WHERE car_id=?";
-        return jdbcTemplate.queryForObject(sql, new RowMapper<Car>() {
-            @Override
-            public Car mapRow(ResultSet resultSet, int i) throws SQLException {
-                return new Car(resultSet.getLong("car_id"), resultSet.getString("mark"), resultSet.getString("model"), resultSet.getString("color"), resultSet.getLong("production_year"));
-            }
-        }, id);
+        List<Car> carList = jdbcTemplate.query(sql, (resultSet, i) -> new Car(resultSet.getLong("car_id"), resultSet.getString("mark"), resultSet.getString("model"), resultSet.getString("color"), resultSet.getLong("production_year")), id);
+
+        if(carList.isEmpty()){
+            return null;
+        }else if(carList.size() == 1){
+            return carList.get(0);
+        }else {
+            return carList.get(0);
+        }
     }
 }
