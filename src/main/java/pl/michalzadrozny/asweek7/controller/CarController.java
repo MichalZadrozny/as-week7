@@ -9,7 +9,6 @@ import pl.michalzadrozny.asweek7.dao.CarDao;
 import pl.michalzadrozny.asweek7.model.Car;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -31,6 +30,18 @@ public class CarController {
         model.addAttribute("carList", carList);
         return "cars";
     }
+
+    @PostMapping("/year")
+    public String getCarsByYear(Model model, @RequestParam int year1, @RequestParam int year2) {
+        log.info("Inside method getCarsByYear()");
+
+        List<Car> carList = carDao.findByYears(year1, year2);
+
+        log.info(carList.toString());
+        model.addAttribute("carList", carList);
+        return "cars";
+    }
+
 
     @GetMapping("/{id}")
     public String getCarByID(@PathVariable long id, Model model) {
@@ -58,7 +69,8 @@ public class CarController {
         if (!foundCar.equals(null)) {
 
             model.addAttribute("car", foundCar);
-            log.info("Car to edit: "+foundCar.toString());
+            model.addAttribute("edit", "/cars/save/edit");
+            log.info("Car to edit: " + foundCar.toString());
 
             return "car-form";
         } else {
@@ -67,62 +79,53 @@ public class CarController {
 
     }
 
-    @PostMapping("/save")
-    public String saveAddedCar(long carId, String mark, String model, String color, long productionYear){
+    @PostMapping("/save/{task}")
+    public String saveCar(@PathVariable String task, long carId, String mark, String model, String color, long productionYear) {
         log.info("Inside method saveAddedCar()");
-
+        log.info(task);
         Car oldCar = carDao.geCarById(carId);
 
-        if (oldCar != null) {
-            oldCar.setMark(mark);
-            oldCar.setModel(model);
-            oldCar.setColor(color);
-            oldCar.setProductionYear(productionYear);
-            carDao.updateCar(oldCar);
-        }else{
-            carDao.saveCar(new Car(carId,mark,model,color,productionYear));
+        if (task.equals("new")) {
+            if (oldCar != null) {
+                return "car-form";
+            } else {
+                carDao.saveCar(new Car(carId, mark, model, color, productionYear));
+            }
+        } else if (task.equals("edit")) {
+            if (oldCar != null) {
+                oldCar.setMark(mark);
+                oldCar.setModel(model);
+                oldCar.setColor(color);
+                oldCar.setProductionYear(productionYear);
+                carDao.updateCar(oldCar);
+            } else {
+                carDao.saveCar(new Car(carId, mark, model, color, productionYear));
+            }
+        } else {
+            log.warn("Undefined task!!!");
         }
 
         return "redirect:/cars";
     }
-
-
-
-//    @PostMapping("/{id}/save")
-//    public String saveCar(@PathVariable long id, String mark, String model, String color, long productionYear) {
-//
-//        Car oldCar = carDao.geCarById(id);
-//
-//        if (!oldCar.equals(null)) {
-//            oldCar.setMark(mark);
-//            oldCar.setModel(model);
-//            oldCar.setColor(color);
-//            oldCar.setProductionYear(productionYear);
-//            carDao.updateCar(oldCar);
-//        }else{
-//            carDao.saveCar(new Car(id,mark,model,color,productionYear));
-//        }
-//
-//        return "redirect:/cars";
-//    }
 
     @GetMapping("/addCar")
     public String addCar(Model model) {
         log.info("Inside method addCar()");
 
         Car car = new Car();
-        model.addAttribute("car",car);
+        model.addAttribute("car", car);
+        model.addAttribute("edit", "/cars/save/new");
         return "car-form";
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteCar(@PathVariable long id){
+    public String deleteCar(@PathVariable long id) {
         log.info("Inside method deleteCar()");
 
         Car foundCar = carDao.geCarById(id);
 
         if (!foundCar.equals(null)) {
-            log.info("Car to delete: "+foundCar.toString());
+            log.info("Car to delete: " + foundCar.toString());
             carDao.deleteCar(id);
             return "redirect:/cars";
         }

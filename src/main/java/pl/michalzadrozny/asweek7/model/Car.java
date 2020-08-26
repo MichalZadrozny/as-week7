@@ -5,8 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Slf4j
@@ -23,14 +21,12 @@ public class Car {
     private String model;
     @NotNull(message = "Field cannot be empty")
     private String color;
-    @Min(1886)
-    @Max(2150)
     @NotNull(message = "Field cannot be empty")
     private long productionYear;
 
     public Car(@NotNull(message = "Field cannot be empty") long carId, @NotNull(message = "Field cannot be empty") String mark,
                @NotNull(message = "Field cannot be empty") String model, @NotNull(message = "Field cannot be empty") String color,
-               @Min(1886) @Max(2150) @NotNull(message = "Field cannot be empty") long productionYear) {
+               @NotNull(message = "Field cannot be empty") long productionYear) {
         this.carId = carId;
         this.mark = mark;
         this.model = model;

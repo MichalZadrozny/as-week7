@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Car Management System</title>
     <link rel="icon" th:href="@{/img/favicon.ico}"/>
-    <link th:href="@{/fonts/css/fontawesome.css}" rel="stylesheet"/>
-    <link th:href="@{/fonts/css/solid.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/fonts/css/fontawesome.css}"/>
+    <link rel="stylesheet" th:href="@{/fonts/css/solid.css}"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -23,6 +23,16 @@
 
 
     <div class="cars-panel shadow">
+
+        <div>
+            <form method="post" th:action="@{/cars/year}" class="range-of-years">
+                <input class="year-input" type="number" id="year1" name="year1">
+                <input class="year-input" type="number" id="year2" name="year2">
+                <input class="years-btn" value="search">
+            </form>
+            <div class="submit-info hide submit-info-years"><p>Fields cannot be empty</p></div>
+        </div>
+
 
         <table>
             <thead>
@@ -72,6 +82,28 @@
 </div>
 
 <script th:src="@{/js/goTo.js}"></script>
+<script>
+    const $year1 = document.querySelector('#year1');
+    const $year2 = document.querySelector('#year2');
+
+    const $submitButton = document.querySelector('.years-btn');
+    const $submitInfo = document.querySelector('.submit-info');
+    const $form = document.querySelector('form');
+
+    function isNotEmpty() {
+
+        if ($year1.value === '' || $year2.value === '') {
+            $submitInfo.classList.remove('hide');
+            console.log("Submit button clicked");
+
+        } else {
+            $form.submit();
+            $submitInfo.classList.add('hide');
+        }
+    }
+
+    $submitButton.addEventListener("click", isNotEmpty);
+</script>
 
 </body>
 </html>

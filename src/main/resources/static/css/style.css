@@ -178,7 +178,7 @@ body {
     border-color: silver;
     border-collapse: separate;
     border-spacing: 0;
-    padding: 5rem 7rem;
+    padding: 2rem 7rem 4rem 7rem;
     width: 100%;
 }
 
@@ -232,6 +232,34 @@ body {
 
 .cars-panel .edit i:hover {
     color: rgba(176, 241, 58, 0.79) !important;
+}
+
+.range-of-years{
+    display: flex;
+    padding: 2rem 2rem 0 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.range-of-years .year-input{
+    margin: 0 1.5rem;
+    width: 10rem;
+}
+
+.years-btn{
+    font-size: 1.75rem;
+    width: 6.8rem;
+    color: white;
+    padding: 0.35rem 0.65rem;
+    background-image: linear-gradient(90deg, rgba(15, 32, 39, 0.80), rgba(32, 58, 67, 0.80), rgba(44, 83, 100, 0.80));;
+    cursor: pointer;
+    border-radius: 8px;
+    border: solid 1px #000000;
+    text-align: center;
+}
+
+.submit-info-years{
+    padding-top: 1.2rem;
 }
 
 @media (max-width: 800px) {

@@ -55,17 +55,33 @@ public class CarDaoImpl implements CarDao {
                 String.valueOf(element.get("color")),
                 Long.parseLong(String.valueOf(element.get("production_year")))
         )).collect(Collectors.toList());
-
-//        maps.forEach(element -> carList.add(new Car(
-//                Long.parseLong(String.valueOf(element.get("car_id"))),
-//                String.valueOf(element.get("mark")),
-//                String.valueOf(element.get("model")),
-//                String.valueOf(element.get("color")),
-//                Long.parseLong(String.valueOf(element.get("production_year")))
-//        )));
-//
-//        return carList;
     }
+
+    @Override
+    public List<Car> findByYears(int year1, int year2) {
+        List<Car> carList = new ArrayList<>();
+
+
+
+        String sql = "SELECT * FROM cars WHERE production_year >= ? AND production_year <= ?";
+        List<Map<String, Object>> maps;
+
+        if (year1 >= year2){
+            maps = jdbcTemplate.queryForList(sql, year2, year1);
+        }else {
+            maps = jdbcTemplate.queryForList(sql, year1, year2);
+        }
+
+        return maps.stream().map(element -> new Car(
+                Long.parseLong(String.valueOf(element.get("car_id"))),
+                String.valueOf(element.get("mark")),
+                String.valueOf(element.get("model")),
+                String.valueOf(element.get("color")),
+                Long.parseLong(String.valueOf(element.get("production_year")))
+        )).collect(Collectors.toList());
+    }
+
+
 
     @Override
     public void updateCar(Car newCar) {
