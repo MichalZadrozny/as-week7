@@ -28,6 +28,7 @@
                 <div class="field"><label class="name" for="year">Production year:</label><input type="number" id="year" th:field="*{productionYear}"/>
                 </div>
                 <div class="submit-info hide"><p>Fields cannot be empty</p></div>
+                <div class="id-info" th:if="${existing_id} != null"><p>Car with provided id already exists</p></div>
                 <div class="buttons">
 
                     <div class="btn return-to-cars-btn" th:onclick="'javascript:goTo(\'/cars\');'">
@@ -54,11 +55,13 @@
 
     const $submitButton = document.querySelector('.submit-btn');
     const $submitInfo = document.querySelector('.submit-info');
+    const $idInfo = document.querySelector('.id-info');
     const $form = document.querySelector('form');
 
     function isNotEmpty() {
 
         if ($mark.value === '' || $model.value === '' || $color.value === ''|| $id.value === ''|| $year.value === '') {
+            $idInfo.classList.add('hide');
             $submitInfo.classList.remove('hide');
             console.log("Submit button clicked");
 

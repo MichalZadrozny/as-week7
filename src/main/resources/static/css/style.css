@@ -109,17 +109,16 @@ body {
     padding-top: 3rem;
 }
 
-.submit-info {
+.submit-info, .id-info {
     text-align: center;
     color: #c70e0e;
     text-shadow: none;
     font-size: 1.8rem;
 }
 
-.submit-info p {
+.submit-info p, .id-info p {
     text-align: center;
     width: 100%;
-
 }
 
 .hide {

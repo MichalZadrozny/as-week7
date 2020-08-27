@@ -80,13 +80,16 @@ public class CarController {
     }
 
     @PostMapping("/save/{task}")
-    public String saveCar(@PathVariable String task, long carId, String mark, String model, String color, long productionYear) {
+    public String saveCar(@PathVariable String task, long carId, String mark, String model, String color, long productionYear, Model attribute) {
         log.info("Inside method saveAddedCar()");
         log.info(task);
         Car oldCar = carDao.geCarById(carId);
 
         if (task.equals("new")) {
             if (oldCar != null) {
+                Car newCar = new Car(carId,mark,model,color,productionYear);
+                attribute.addAttribute("car", newCar);
+                attribute.addAttribute("existing_id", carId);
                 return "car-form";
             } else {
                 carDao.saveCar(new Car(carId, mark, model, color, productionYear));
